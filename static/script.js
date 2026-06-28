@@ -9,7 +9,7 @@ const chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-            label: 'Erro MSE (espaço normalizado)',
+            label: 'erro MSE (espaço normalizado)',
             data: [],
             borderColor: '#32a041',
             backgroundColor: 'rgba(50,160,65,0.08)',
@@ -23,7 +23,7 @@ const chart = new Chart(ctx, {
         animation: false,
         plugins: { legend: { display: true } },
         scales: {
-            x: { display: true, title: { display: true, text: 'Época' } },
+            x: { display: true, title: { display: true, text: 'epoca' } },
             y: { display: true, title: { display: true, text: 'MSE' }, beginAtZero: true }
         }
     }
@@ -77,7 +77,7 @@ function toggleAutoTrain() {
     const btn = document.getElementById('autoTrainBtn')
 
     if (autoTraining) {
-        btn.innerText    = 'Parar Treinamento'
+        btn.innerText    = 'parar treinamento'
         stableEpochs     = 0
         trainingInterval = setInterval(nextEpoch, 30)
     } else {
@@ -89,7 +89,7 @@ function stopAutoTraining() {
     autoTraining = false
     clearInterval(trainingInterval)
     trainingInterval = null
-    document.getElementById('autoTrainBtn').innerText = 'Treinamento Automático'
+    document.getElementById('autoTrainBtn').innerText = 'treinamento automatico'
     stableEpochs = 0
 }
 
@@ -101,7 +101,7 @@ async function nextEpoch() {
 
     if (autoTraining && stableEpochs >= STABILITY_REQUIRED) {
         stopAutoTraining()
-        showToast('Rede convergiu! Treinamento encerrado.')
+        showToast('rede convergiu. treinamento encerrado')
     }
 }
 
@@ -112,7 +112,7 @@ async function turboTrain() {
     if (autoTraining) stopAutoTraining()
 
     setButtonsDisabled(true)
-    btn.innerText = ` Treinando ${EPOCHS.toLocaleString()} épocas…`
+    btn.innerText = ` treinando ${EPOCHS.toLocaleString()} epocas..`
 
     const data = await fetch('/fast_train', {
         method:  'POST',
@@ -121,42 +121,42 @@ async function turboTrain() {
     }).then(r => r.json())
 
     setButtonsDisabled(false)
-    btn.innerText = ' Treino Turbo (5000 épocas)'
+    btn.innerText = ' treino (5000 epocas)'
 
     updateInterface(data)
-    showToast(`Turbo concluído! ${data.epoch} épocas — erro ${data.error.toFixed(6)}`)
+    showToast(`treino concluido! ${data.epoch} epocas - erro ${data.error.toFixed(6)}`)
 }
 
 async function resetNetwork() {
     const data = await fetch('/reset', { method: 'POST' }).then(r => r.json())
     updateInterface(data)
-    showToast('Rede reiniciada com pesos aleatórios.')
+    showToast('rede reiniciada com pesos aleatorios')
 }
 
 async function corruptMemory() {
     const data = await fetch('/corrupt', { method: 'POST' }).then(r => r.json())
     updateInterface(data)
-    showToast('Memória corrompida! Re-treine a rede.')
+    showToast('memoria corrompida. retreine a rede')
 }
 
 async function saveModel() {
     const result = await fetch('/save', { method: 'POST' }).then(r => r.json())
     if (result.ok) {
-        showToast(`Modelo salvo! (época ${result.epoch})`)
+        showToast(`modelo salvo. (epoca ${result.epoch})`)
     } else {
-        showToast('Erro ao salvar.')
+        showToast('erro ao salvar')
     }
 }
 
 async function loadModel() {
     const response = await fetch('/load', { method: 'POST' })
     if (!response.ok) {
-        showToast('Nenhum modelo salvo encontrado.')
+        showToast('nenhum modelo salvo encontrado')
         return
     }
     const data = await response.json()
     updateInterface(data)
-    showToast(`Modelo carregado! (época ${data.epoch})`)
+    showToast(`modelo carregad. (epoca ${data.epoch})`)
 }
 
 async function estimarConsumo() {
