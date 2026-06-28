@@ -95,10 +95,10 @@ predictions = (
 for i in range(len(X)):
 
     print(
-        f'Entrada: {X[i]}'
-        f'| Esperado: {y[i][0]} '
-        f'| Previsto: {predictions[i][0]}'
+        f'entrada: {X[i]}'
+        f'| esperado: {y[i][0]} '
+        f'| previsto: {predictions[i][0]}'
     )
 
-print(f'\nTotal de epocas: {epochs}')
-print(f'Erro final: {mse:.6f}')
+print(f'\ntotal de epocas: {epochs}')
+print(f'erro final: {mse:.6f}')
