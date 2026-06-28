@@ -69,30 +69,7 @@ class NeuralNetwork:
             "message": msg
         }
 
-        x = x.reshape(1, -1)
-        x_norm = (x - self.X_mean) / self.X_std
-
-        Z1 = x_norm.dot(self.W1) + self.b1
-        A1 = self.relu(Z1)
-        Z2 = A1.dot(self.W2) + self.b2
-
-        kwh = max(0, float(self.denormalize_output(Z2).item()))
-
-        if kwh < 100:
-            level = "baixo"
-            msg = "consumo leve, casa econômica"
-        elif kwh < 400:
-            level = "médio"
-            msg = "consumo moderado, uso equilibrado"
-        else:
-            level = "alto"
-            msg = "consumo elevado, atenção no gasto"
-
-        return {
-            "kwh": kwh,
-            "level": level,
-            "message": msg
-    }
+       
     def get_energy_data(self):
         import numpy as np
 
