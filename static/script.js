@@ -50,7 +50,7 @@ function updateInterface(data) {
         const previsto = data.predictions[i].toFixed(1)
         const diff     = Math.abs(data.expected[i] - data.predictions[i])
         const pct      = (diff / data.expected[i]) * 100
-        const emoji    = pct < 15 ? '✅' : pct < 30 ? '' : '❌'
+        const emoji    = pct < 15 ? 'OK' : pct < 30 ? '' : 'NOK'
 
         table.innerHTML += `
         <tr>
