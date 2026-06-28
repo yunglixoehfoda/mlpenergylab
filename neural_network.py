@@ -25,7 +25,7 @@ class NeuralNetwork:
             return {
                 "kwh": 67,
                 "level": "67",
-                "message": "67 detectado. a profecia foi cumprida."
+                "message": "67 detectado."
             }
 
         if x[6] <= 0:
