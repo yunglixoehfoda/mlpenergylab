@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MLP Energy Lab</title>
+<title>MLP ENERGIA</title>
 <link rel="stylesheet" href="/static/style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -13,37 +13,37 @@
     <div class="nav-left">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDNhodosZ4p1R0R2eh4fR-BFJ0DHUUOsHWUQ&s"
              class="if-logo" alt="IF">
-        <span class="nav-title">MLP ENERGY LAB</span>
+        <span class="nav-title">MLP ENERGIA</span>
     </div>
 </nav>
 
 <div class="container">
 
-    <h1>MLP Energy Lab</h1>
+    <h1>MLP ENERGIA</h1>
     <p class="subtitle">
-        Estimativa de consumo elétrico residencial com rede neural MLP — 7 entradas → 8 neurônios ocultos → 1 saída (kWh)
+        estimativa de consumo elétrico residencial com rede neural MLP - 7 entradas -> 8 neuronios ocultos -> 1 saída (kWh)
     </p>
 
     <div class="controls">
         <div class="ctrl-group">
-            <span class="ctrl-label">Modo didático</span>
+            <span class="ctrl-label">modo didático</span>
             <button onclick="nextEpoch()">+1 epoca</button>
-            <button id="autoTrainBtn" onclick="toggleAutoTrain()"> Treino didático</button>
+            <button id="autoTrainBtn" onclick="toggleAutoTrain()"> treino</button>
         </div>
         <div class="ctrl-group">
             <span class="ctrl-label">5000
             </span>
-            <button id="turboBtn" class="turbo" onclick="turboTrain()"> Treino (5000 epocas)</button>
+            <button id="turboBtn" class="turbo" onclick="turboTrain()"> treino (5000 epocas)</button>
         </div>
         <div class="ctrl-group">
             <span class="ctrl-label">modelo</span>
-            <button onclick="saveModel()" title="Salva pesos + bias em model.json"> Salvar</button>
-            <button onclick="loadModel()" title="Carrega model.json do disco"> Carregar</button>
+            <button onclick="saveModel()" title="Salva pesos + bias em model.json"> salvar</button>
+            <button onclick="loadModel()" title="Carrega model.json do disco"> carregar</button>
         </div>
         <div class="ctrl-group">
             <span class="ctrl-label">Outros</span>
-            <button onclick="resetNetwork()">Resetar rede</button>
-            <button class="danger" onclick="corruptMemory()">Corromper memória</button>
+            <button onclick="resetNetwork()">resetar rede</button>
+            <button class="danger" onclick="corruptMemory()">corromper memória</button>
         </div>
     </div>
 
@@ -53,26 +53,26 @@
             <div class="value" id="epoch">0</div>
         </div>
         <div class="stat-card">
-            <div class="label">Erro MSE</div>
+            <div class="label">erro MSE</div>
             <div class="value" id="error">—</div>
         </div>
     </div>
 
     <div class="card bias-card">
-        <h3>Bias atual</h3>
+        <h3>bias atual</h3>
         <code id="biasDisplay" style="font-size:0.78rem;color:#555;word-break:break-all;">—</code>
     </div>
 
     <div class="dashboard">
 
         <div class="card">
-            <h3>Resultados por amostra</h3>
+            <h3>resultados por amostra</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Entradas</th>
-                        <th>Real</th>
-                        <th>Previsto</th>
+                        <th>entradas</th>
+                        <th>real</th>
+                        <th>previsto</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
@@ -89,15 +89,15 @@
     </div>
 
     <div class="card" style="margin-bottom:28px;">
-        <h3>Visualização 3D da rede neural</h3>
+        <h3>visualização 3D do modelo da rede neural</h3>
         <div id="threejs-box"></div>
     </div>
 
     <div class="card">
-        <h3>Estimar consumo de uma residência</h3>
+        <h3>estimar consumo de uma residencia</h3>
         <div class="predict-grid">
             <div class="field-group">
-                <label>Moradores</label>
+                <label>moradores</label>
                 <input type="number" id="p_moradores" value="4" min="0">
             </div>
             <div class="field-group">
@@ -105,39 +105,39 @@
                 <input type="number" id="p_tvs" value="2" min="0">
             </div>
             <div class="field-group">
-                <label>Ventiladores</label>
+                <label>ventiladores</label>
                 <input type="number" id="p_ventiladores" value="3" min="0">
             </div>
             <div class="field-group">
-                <label>Geladeiras</label>
+                <label>geladeiras</label>
                 <input type="number" id="p_geladeiras" value="1" min="0">
             </div>
             <div class="field-group">
-                <label>Horas de ar-condicionado/dia</label>
+                <label>horas de ar-condicionado/dia</label>
                 <input type="number" id="p_horas_ar" value="4" min="0">
             </div>
             <div class="field-group">
-                <label>Lampadas</label>
+                <label>lampadas</label>
                 <input type="number" id="p_lampadas" value="10" min="0">
             </div>
             <div class="field-group">
-                <label>Área da casa (m²)</label>
+                <label>area da casa (m²)</label>
                 <input type="number" id="p_area" value="80" min="0">
             </div>
         </div>
-        <button onclick="estimarConsumo()"> Estimar consumo</button>
+        <button onclick="estimarConsumo()">estimar consumo</button>
 
         <div class="result-box" id="resultBox" style="display:none;">
             <div class="result-item">
-                <div class="r-label">Consumo previsto</div>
+                <div class="r-label">consumo previsto</div>
                 <div class="r-value" id="resultKwh">—</div>
             </div>
             <div class="result-item">
-                <div class="r-label">Conta estimada</div>
+                <div class="r-label">conta estimada</div>
                 <div class="r-value" id="resultReais">—</div>
             </div>
             <div class="result-item">
-                <div class="r-label">Nível</div>
+                <div class="r-label">nível</div>
                 <div class="r-value" id="resultNivel">—</div>
             </div>
         </div>
