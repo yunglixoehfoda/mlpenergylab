@@ -19,14 +19,9 @@ class NeuralNetwork:
     def predict_custom(self, features: list):
 
         x = np.array(features, dtype=float)
+
+
         
-        if np.all(x == 67):
-            
-            return {
-                "kwh": 67,
-                "level": "67",
-                "message": "67 detectado."
-            }
 
         if x[6] <= 0:
             return {
